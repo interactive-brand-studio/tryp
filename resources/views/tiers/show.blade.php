@@ -11,7 +11,7 @@
                     <h1 class="text-4xl font-bold mb-4">{{ strtoupper($packageName) }}</h1>
                     <p class="text-xl">{{ $packageDescription }}</p>
                 </div>
-                
+
                 <!-- Package Content -->
                 <div class="p-8">
                     <!-- Package Image and Price -->
@@ -23,11 +23,11 @@
                                 <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070&auto=format&fit=crop" alt="{{ $packageName }}" class="w-full h-auto rounded-xl shadow-lg">
                             @endif
                         </div>
-                        <div class="md:w-1/2">                           
-                            
+                        <div class="md:w-1/2">
+
                             <div class="bg-primary-50 rounded-xl p-6 shadow-md flex flex-col h-full">
                                 <h2 class="text-2xl font-bold primary-text-color mb-4">Package Details</h2>
-                                
+
                                 <div class="mb-6">
                                     <p class="text-lg text-gray-700">
                                         @if(isset($package) && $package->description)
@@ -37,7 +37,7 @@
                                         @endif
                                     </p>
                                 </div>
-                                
+
                                 <div class="mt-auto">
                                     <div class="text-3xl font-bold primary-text-color mb-4">
                                         From ${{ number_format($packagePrice, 0) }}
@@ -49,11 +49,11 @@
                             </div>
                         </div>
                     </div>
-                    
+
                     <!-- Package Features -->
                     <div class="mb-8">
                         <h2 class="text-2xl font-bold primary-text-color mb-4">What's Included</h2>
-                        
+
                         <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                             @if(isset($package) && $package->features && count($package->features) > 0)
                                 @foreach($package->features as $feature)
@@ -85,16 +85,28 @@
                             @endif
                         </div>
                     </div>
-                    
+
                     <!-- Booking Form -->
                     <div id="booking-form" class="bg-gray-50 rounded-xl p-6 shadow-md">
                         <h2 class="text-2xl font-bold primary-text-color mb-6">Book Your {{ $packageName }} Package</h2>
-                        
+
                         <form action="{{ route('tiers.book') }}" method="POST" class="space-y-6">
                             @csrf
                             <input type="hidden" name="package_type" value="{{ $packageType }}">
                             <input type="hidden" name="package_price" value="{{ $packagePrice }}">
-                            
+
+                            <div class="mb-4">
+                                <label for="quantity" class="block text-sm font-medium text-gray-700 mb-1">Quantity</label>
+                                <select name="quantity" id="quantity" class="w-full text-black px-4 py-3 border border-gray-300 rounded-lg" required>
+                                    @for ($i = 1; $i <= 4; $i++)
+                                        <option value="{{ $i }}">{{ $i }}</option>
+                                    @endfor
+                                </select>
+                                @error('quantity')
+                                    <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                                @enderror
+                            </div>
+
                             <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                 <div>
                                     <label for="first_name" class="block text-sm font-medium text-gray-700 mb-1">First Name <span class="text-red-500">*</span></label>
@@ -111,7 +123,7 @@
                                     @enderror
                                 </div>
                             </div>
-                            
+
                             <div>
                                 <label for="email" class="block text-sm font-medium text-gray-700 mb-1">Email <span class="text-red-500">*</span></label>
                                 <input type="email" name="email" id="email" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" required>
@@ -119,7 +131,7 @@
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
-                            
+
                             <div>
                                 <label for="phone" class="block text-sm font-medium text-gray-700 mb-1">Phone <span class="text-red-500">*</span></label>
                                 <input type="tel" name="phone" id="phone" class="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-primary-500" placeholder="(XXX) XXX-XXXX" required>
@@ -127,11 +139,11 @@
                                     <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                 @enderror
                             </div>
-                            
+
                             <!-- Payment Information -->
                             <div>
                                 <h3 class="text-xl font-bold text-primary-800 mb-4">Payment Information <span class="text-red-500">*</span></h3>
-                                
+
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
                                     <div>
                                         <label for="card_number" class="block text-sm font-medium text-gray-700 mb-1">Card Number <span class="text-red-500">*</span></label>
@@ -148,7 +160,7 @@
                                         @enderror
                                     </div>
                                 </div>
-                                
+
                                 <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                     <div>
                                         <label for="expiration_month" class="block text-sm font-medium text-gray-700 mb-1">Expiration Month <span class="text-red-500">*</span></label>
@@ -183,11 +195,11 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Billing Address -->
                             <div>
                                 <h3 class="text-xl font-bold text-blue-800 mb-4">Billing Address <span class="text-red-500">*</span></h3>
-                                
+
                                 <div class="space-y-4">
                                     <div>
                                         <label for="address" class="block text-sm font-medium text-gray-700 mb-1">Street Address <span class="text-red-500">*</span></label>
@@ -196,7 +208,7 @@
                                             <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
                                         @enderror
                                     </div>
-                                    
+
                                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                                         <div>
                                             <label for="city" class="block text-sm font-medium text-gray-700 mb-1">City <span class="text-red-500">*</span></label>
@@ -274,7 +286,7 @@
                                     </div>
                                 </div>
                             </div>
-                            
+
                             <!-- Consent Checkbox -->
                             <div class="flex items-start">
                                 <div class="flex items-center h-5">
@@ -287,7 +299,7 @@
                                     <label for="consent" class="text-gray-700">I consent to receive telephone sales calls, marketing calls and messages, including prerecorded messages and text messages from Monster Reservations Group and its partners, agents or affiliates at the phone number(s)/wireless numbers provided above regarding offers, products and services, including through an automated telephone dialing system. I understand that I am not required to provide this consent to make a purchase from Monster.</label>
                                 </div>
                             </div>
-                            
+
                             <!-- Submit Button -->
                             <div class="text-center">
                                 <button type="submit" class="px-8 py-4 bg-gradient-to-r from-blue-600 to-teal-500 text-white rounded-full font-bold hover:from-blue-700 hover:to-teal-600 transition-colors shadow-xl transform hover:scale-105">
@@ -299,7 +311,7 @@
             </div>
         </div>
     </div>
-    
+
     <!-- Fixed wave at bottom of the section -->
     <div class="absolute bottom-0 left-0 right-0 w-full" style="z-index: 1;">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 120" preserveAspectRatio="none" style="width: 100%; height: 120px; display: block;">
@@ -313,7 +325,7 @@
     <div class="container mx-auto px-4">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-2xl font-bold text-blue-800 mb-8 text-center">BOOK WITH CONFIDENCE</h2>
-            
+
             <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
                 <div class="text-center">
                     <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
@@ -321,21 +333,21 @@
                     </div>
                     <p class="font-medium">Secure Payment</p>
                 </div>
-                
+
                 <div class="text-center">
                     <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
                         <i class="fas fa-shield-alt text-2xl"></i>
                     </div>
                     <p class="font-medium">Protected Information</p>
                 </div>
-                
+
                 <div class="text-center">
                     <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
                         <i class="fas fa-headset text-2xl"></i>
                     </div>
                     <p class="font-medium">24/7 Support</p>
                 </div>
-                
+
                 <div class="text-center">
                     <div class="w-16 h-16 mx-auto mb-4 bg-blue-100 rounded-full flex items-center justify-center text-blue-600">
                         <i class="fas fa-thumbs-up text-2xl"></i>
@@ -357,7 +369,7 @@
         position: relative;
         color: white;
     }
-    
+
     .hero-gradient::before {
         content: '';
         position: absolute;

@@ -31,6 +31,14 @@ class Destination extends Model
     }
 
     /**
+     * Get the hotels for this destination.
+     */
+    public function hotels()
+    {
+        return $this->hasMany(Hotel::class);
+    }
+    
+    /**
      * Ensure included_items is always an array
      */
     public function getIncludedItemsAttribute($value)

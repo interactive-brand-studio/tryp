@@ -7,18 +7,18 @@
  <section class="hero-slider pt-24 pb-40 flex items-center justify-center relative overflow-hidden">    <!-- Background Image Slideshow -->
     <div class="slideshow-container absolute inset-0">
         <div class="slideshow-slide absolute inset-0 opacity-100 transition-opacity duration-1000 ease-in-out">
-            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                alt="Contact Us Hero 1" 
+            <img src="https://images.unsplash.com/photo-1566073771259-6a8506099945?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Contact Us Hero 1"
                 class="w-full h-full object-cover">
         </div>
         <div class="slideshow-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                alt="Contact Us Hero 2" 
+            <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Contact Us Hero 2"
                 class="w-full h-full object-cover">
         </div>
         <div class="slideshow-slide absolute inset-0 opacity-0 transition-opacity duration-1000 ease-in-out">
-            <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                alt="Contact Us Hero 3" 
+            <img src="https://images.unsplash.com/photo-1510414842594-a61c69b5ae57?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+                alt="Contact Us Hero 3"
                 class="w-full h-full object-cover">
         </div>
         <!-- Adjusted gradient overlay for better contrast -->
@@ -48,7 +48,7 @@
                 (ONLINE SPECIAL ONLY)
             </p>
         </div>
-        
+
         <div class="text-center text-white mb-8">
             <h2 class="text-2xl md:text-3xl font-semibold">CHOOSE YOUR PERFECT TRAVEL PLAN BELOW:</h2>
         </div>
@@ -96,7 +96,7 @@
                         @else
                             <p class="text-gray-600 mb-6">Please contact us for package details.</p>
                         @endif
-                        
+
                         <!-- Hidden Package Details -->
                         <div class="package-details-content hidden mb-6 overflow-hidden transition-all duration-300">
                             <p class="text-gray-700 mb-4">{{ $package->description }}</p>
@@ -108,8 +108,8 @@
                                 <i class="fas fa-chevron-down ml-1 transition-transform duration-300"></i>
                             </a>
                         </div>
-                        
-                        <a href="{{ route('tiers.show', ['type' => $package->type]) }}" 
+
+                        <a href="{{ route('tiers.show', ['type' => $package->type]) }}"
                            class="block w-full text-center py-3 bg-gradient-to-r from-blue-600 to-indigo-700 text-white rounded-full font-semibold hover:from-blue-700 hover:to-indigo-800 transition-colors shadow-lg">
                             SELECT PLAN
                         </a>
@@ -126,7 +126,7 @@
         <div class="max-w-5xl mx-auto">            <div class="bg-gradient-to-r from-blue-600 to-teal-500 rounded-2xl shadow-xl overflow-hidden">
                 <div class="p-8">
                     <h2 class="text-2xl font-bold text-white mb-6 text-center">WHAT MAKES OUR TRAVEL TIERS SO GREAT?</h2>
-                    
+
                     <div class="space-y-4">
                         <div class="flex items-start">
                             <i class="fas fa-check-circle text-white text-xl mr-3 mt-1"></i>
@@ -157,9 +157,9 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
             <div>
                 <h2 class="text-3xl font-bold text-primary-800 mb-6">With An 8 Day / 7 Night Monster Week Vacation Package, The Power Of Travel Is In Your Hands!</h2>
-                
+
                 <p class="text-gray-700 mb-6">Choose the tier that suits your travel needs best, and let us handle the rest. Visit the vibrant shores of California or the bustling streets of Las Vegas with a Signature Monster Week trip. Adventure to the vineyards of Italy or experience the grandeur of the Eiffel tower with an ultra premium trip.</p>
-                
+
                 <p class="text-gray-700 mb-6">Our Monster Week Vacation Package promises an unforgettable journey filled with excitement, discovery, and unbelievable experiences. Book now and let the adventure begin!</p>
             </div>
               <div class="aspect-video bg-gradient-to-br from-primary-600 to-teal-500 rounded-2xl shadow-2xl overflow-hidden relative">
@@ -182,21 +182,21 @@
 
 <!-- Frequently Asked Questions -->
 <section class="py-16 bg-gray-50">
-    <div class="container mx-auto px-4">  
-        
+    <div class="container mx-auto px-4">
+
     <h2 class="text-3xl font-bold text-blue-600 mb-12 text-center">
             <span class="relative inline-block">
                 Frequently Asked Questions
                 <span class="absolute bottom-0 left-0 w-full h-1 bg-yellow-400"></span>
             </span>
         </h2>
-    
-        
+
+
         <div class="max-w-4xl mx-auto space-y-4">
             <!-- FAQ Item 1 -->
           @foreach($faqCategories as $category => $faqs)
                 @foreach($faqs as $faq)
-                    <div class="border border-gray-200 rounded-lg overflow-hidden faq-item" 
+                    <div class="border border-gray-200 rounded-lg overflow-hidden faq-item"
                          data-category="{{ Str::slug($category) }}">
                         <button class="w-full flex items-center justify-between p-4 bg-gray-50 hover:bg-gray-100 transition-colors">
                             <span class="flex items-center text-left">                                <i class="fas fa-question-circle text-primary-700 mr-3"></i>
@@ -220,15 +220,15 @@
         <img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?q=80&w=2070&auto=format&fit=crop" alt="Beach Background" class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-gradient-to-r from-primary-900/70 to-teal-600/70"></div>
     </div>
-    
+
     <div class="container mx-auto px-4 relative z-10">
         <div class="max-w-5xl mx-auto">
             <h2 class="text-4xl font-bold text-white mb-8 text-center">
                 SEE WHY GUESTS SAY THEY LOVE US!
             </h2>
-            
+
             <div class="h-1 w-64 mx-auto bg-teal-400 rounded mb-12"></div>
-            
+
             <!-- YouTube Channel Preview -->
             <div class="bg-white rounded-xl shadow-2xl overflow-hidden mb-10">
                 <div class="p-4 bg-gray-100 border-b flex items-center justify-between">
@@ -242,14 +242,14 @@
                         <i class="fab fa-youtube mr-2"></i> Subscribe
                     </a>
                 </div>
-                
+
                 <!-- Tabs -->                <div class="flex border-b">
                     <button class="py-3 px-6 font-medium text-primary-800 border-b-2 border-primary-600">Cabo San Lucas</button>
                     <button class="py-3 px-6 font-medium text-gray-600 hover:text-primary-800">Cancun</button>
                     <button class="py-3 px-6 font-medium text-gray-600 hover:text-primary-800">Puerto Vallarta</button>
                     <button class="py-3 px-6 font-medium text-gray-600 hover:text-primary-800">Punta Cana</button>
                 </div>
-                
+
                 <!-- Videos Grid -->
 <div class="p-6">
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">                        <!-- Video 1 -->
@@ -312,7 +312,7 @@
     .testimonials-section {
         min-height: 90vh;
     }
-    
+
     @media (max-width: 768px) {
         .testimonials-section {
             min-height: auto;
@@ -335,18 +335,18 @@
 
             <form id="newsletter-form" class="flex flex-col sm:flex-row gap-3 max-w-md mx-auto sm:max-w-xl">
                 @csrf
-                <input 
-                    type="email" 
+                <input
+                    type="email"
                     name="email"
                     id="newsletter-email"
-                    placeholder="Your email address" 
+                    placeholder="Your email address"
                     class="px-5 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-indigo-200 focus:border-indigo-500 w-full"
                     required
                 >
-                <button 
+                <button
                     type="submit"
                         class="btn-primary text-white font-semibold px-6 py-3 rounded-lg transition duration-300 whitespace-nowrap">
-                
+
                     Subscribe
                 </button>
             </form>
@@ -365,20 +365,20 @@
     .hero-slider {
         position: relative;
     }
-    
+
     .slider-container {
         position: absolute;
         width: 100%;
         height: 100%;
         overflow: hidden;
     }
-    
+
     .slider-track {
         position: relative;
         height: 100%;
         width: 100%;
     }
-    
+
     .slider-item {
         position: absolute;
         top: 0;
@@ -390,11 +390,11 @@
         opacity: 0;
         transition: opacity 1s ease-in-out;
     }
-    
+
     .slider-item.active {
         opacity: 1;
     }
-    
+
     .slider-dot {
         width: 12px;
         height: 12px;
@@ -405,23 +405,23 @@
         border: 2px solid white;
         transition: background-color 0.3s ease;
     }
-    
+
     .slider-dot.active {
         background-color: white;
     }
-    
+
     /* Custom gradient background for hero section */
     .hero-gradient {
         background: linear-gradient(135deg, rgba(59, 130, 246, 0.8), rgba(16, 185, 129, 0.8));
     }
-    
+
     /* Package Details Animation */
     .package-details-content {
         max-height: 0;
         transition: max-height 0.5s ease-out, opacity 0.3s ease-out, margin 0.3s ease-out;
         opacity: 0;
     }
-    
+
     .package-details-content.active {
         max-height: 500px;
         opacity: 1;
@@ -437,7 +437,7 @@
         // Background Slider (Adjusting to match the slideshow-slide classes)
         const slideshowSlides = document.querySelectorAll('.slideshow-slide');
         let currentSlide = 0;
-        
+
         function showSlide(index) {
             slideshowSlides.forEach((slide, i) => {
                 slide.classList.toggle('opacity-100', i === index);
@@ -445,7 +445,7 @@
             });
             currentSlide = index;
         }
-        
+
         function nextSlide() {
             let next = currentSlide + 1;
             if (next >= slideshowSlides.length) {
@@ -453,18 +453,18 @@
             }
             showSlide(next);
         }
-        
+
         // Start auto-slide
         let slideInterval = setInterval(nextSlide, 5000);
-        
+
         // FAQ accordion functionality
         const faqItems = document.querySelectorAll('.faq-item');
-        
+
         faqItems.forEach(item => {
             const button = item.querySelector('button');
             const content = item.querySelector('div.p-4');
             const icon = button.querySelector('.fas.fa-chevron-down');
-            
+
             button.addEventListener('click', function() {
                 // Toggle display
                 if (content.style.maxHeight) {
@@ -478,24 +478,24 @@
                 }
             });
         });
-        
+
         // Package details toggle functionality
         const packageDetailsToggles = document.querySelectorAll('.package-details-toggle');
-        
+
         packageDetailsToggles.forEach(toggle => {
             toggle.addEventListener('click', function(e) {
                 e.preventDefault();
                 const icon = this.querySelector('i');
                 // The details content is now previous to the toggle button
                 const detailsContent = this.closest('div').previousElementSibling;
-                
+
                 // Toggle icon rotation and details visibility
                 if (detailsContent.classList.contains('hidden')) {
                     // Show details
                     detailsContent.classList.remove('hidden');
                     detailsContent.classList.add('active');
                     icon.classList.add('transform', 'rotate-180');
-                    
+
                     // Set timeout to allow transition to happen
                     setTimeout(() => {
                         detailsContent.style.maxHeight = detailsContent.scrollHeight + 'px';
@@ -505,7 +505,7 @@
                     detailsContent.classList.remove('active');
                     detailsContent.style.maxHeight = '0px';
                     icon.classList.remove('transform', 'rotate-180');
-                    
+
                     // Set timeout to allow transition to complete before hiding
                     setTimeout(() => {
                         detailsContent.classList.add('hidden');

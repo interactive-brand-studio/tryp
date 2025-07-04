@@ -13,7 +13,7 @@
             Back to List
         </a>
     </div>
-    
+
     <!-- Booking Details -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden">
         <div class="p-6">
@@ -28,7 +28,7 @@
                     <p class="text-base text-gray-900">{{ $booking->package_name }}</p>
                     <p class="text-sm text-gray-500">Type: {{ ucfirst($booking->package_type) }}</p>
                 </div>
-                
+
                 <!-- User Information -->
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Linked User</p>
@@ -40,82 +40,82 @@
                         @endif
                     </p>
                 </div>
-                
+
                 <div class="col-span-2">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4 pt-4 border-t border-gray-200">Customer Information</h2>
                 </div>
-                
+
                 <!-- Name -->
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Name</p>
                     <p class="text-base text-gray-900">{{ $booking->first_name }} {{ $booking->last_name }}</p>
                 </div>
-                
+
                 <!-- Price -->
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Package Price</p>
                     <p class="text-base text-gray-900">${{ number_format($booking->package_price, 2) }}</p>
                 </div>
-                
+
                 <!-- Email -->
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Email</p>
                     <p class="text-base text-gray-900">{{ $booking->email }}</p>
                 </div>
-                
+
                 <!-- Phone -->
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Phone</p>
                     <p class="text-base text-gray-900">{{ $booking->phone }}</p>
                 </div>
-                
+
                 <div class="col-span-2">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4 pt-4 border-t border-gray-200">Billing Address</h2>
                 </div>
-                
+
                 <!-- Address -->
                 <div class="col-span-2">
                     <p class="text-sm font-medium text-gray-700 mb-1">Street Address</p>
                     <p class="text-base text-gray-900">{{ $booking->address }}</p>
                 </div>
-                
+
                 <!-- City, State, Zip -->
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">City</p>
                     <p class="text-base text-gray-900">{{ $booking->city }}</p>
                 </div>
-                
+
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">State</p>
                     <p class="text-base text-gray-900">{{ $booking->state }}</p>
                 </div>
-                
+
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Zip Code</p>
                     <p class="text-base text-gray-900">{{ $booking->zip }}</p>
                 </div>
-                
+
                 <div class="col-span-2">
                     <h2 class="text-xl font-semibold text-gray-800 mb-4 pt-4 border-t border-gray-200">Booking Details</h2>
                 </div>
-                
+
                 <!-- Status -->
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Status</p>
-                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                    <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full
                         {{ $booking->status == 'confirmed' ? 'bg-green-100 text-green-800' : '' }}
                         {{ $booking->status == 'pending' ? 'bg-yellow-100 text-yellow-800' : '' }}
                         {{ $booking->status == 'cancelled' ? 'bg-red-100 text-red-800' : '' }}">
                         {{ ucfirst($booking->status) }}
                     </span>
                 </div>
-                
+
                 <!-- Payment Method -->
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Payment Method</p>
                     <p class="text-base text-gray-900">{{ ucfirst(str_replace('_', ' ', $booking->payment_method)) }}</p>
                 </div>
-                
+
                 <!-- Card Last Four -->
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Card Details</p>
@@ -127,13 +127,19 @@
                         @endif
                     </p>
                 </div>
-                
+
                 <!-- Created At -->
                 <div>
                     <p class="text-sm font-medium text-gray-700 mb-1">Booking Date</p>
                     <p class="text-base text-gray-900">{{ $booking->created_at->format('M d, Y h:i A') }}</p>
                 </div>
-                
+
+                <!-- Transaction ID -->
+                <div>
+                    <p class="text-sm font-medium text-gray-700 mb-1">Transaction ID</p>
+                    <p class="text-base text-gray-900">{{ $booking->transaction_id ? $booking->transaction_id : 'N/A' }}</p>
+                </div>
+
                 <!-- Notes -->
                 @if($booking->notes)
                 <div class="col-span-2 mt-4">

@@ -7,9 +7,17 @@ use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Faq;
+use App\Services\PaymentService;
 
 class TiersController extends Controller
 {
+    protected $paymentService;
+
+    public function __construct(PaymentService $paymentService)
+    {
+        $this->paymentService = $paymentService;
+    }
+
     /**
      * Display the packages index.
      */
@@ -19,13 +27,13 @@ class TiersController extends Controller
         $travelPackages = TravelPackage::where('status', 'active')
             ->orderBy('sort_order')
             ->get();
-        
+
         $faqCategories = Faq::active()
             ->ordered()
             ->get()
             ->groupBy('category');
         // Pass the $travelPackages variable to the view
-        return view('tiers.index', compact('travelPackages','faqCategories'));
+        return view('tiers.index', compact('travelPackages', 'faqCategories'));
     }
 
     /**
@@ -37,12 +45,12 @@ class TiersController extends Controller
         $package = TravelPackage::where('type', $type)
             ->where('status', 'active')
             ->firstOrFail();
-            
+
         $packageType = $type;
         $packageName = $package->name;
         $packageDescription = $package->short_description ?? 'Premium vacation package';
         $packagePrice = $package->price;
-        
+
         return view('tiers.show', compact(
             'packageType',
             'packageName',
@@ -61,6 +69,7 @@ class TiersController extends Controller
         $validated = $request->validate([
             'package_type' => 'required|string',
             'package_price' => 'required|numeric',
+            'quantity' => 'required|integer|min:1|max:4',
             'first_name' => 'required|string|max:255',
             'last_name' => 'required|string|max:255',
             'email' => 'required|email|max:255',
@@ -76,11 +85,37 @@ class TiersController extends Controller
             'zip' => 'required|string|max:10',
             'consent' => 'required',
         ]);
-        
+
+
         // Find the package by type
         $package = TravelPackage::where('type', $validated['package_type'])->firstOrFail();
-        
+
         // Create a new booking in the database
+        $cardData = [
+            'card_number' => $validated['card_number'],
+            'exp_month' => $validated['expiration_month'],
+            'exp_year' => $validated['expiration_year'],
+            'cvc' => $validated['cvv'],
+        ];
+
+        $customerInfo = [
+            'name' => $validated['first_name'] . ' ' . $validated['last_name'],
+            'email' => $validated['email'],
+            'address' => $validated['address'],
+            'city' => $validated['city'],
+            'state' => $validated['state'],
+            'zip' => $validated['zip'],
+        ];
+
+        $payment = $this->paymentService->processCardPayment(
+            $cardData,
+            $validated['package_price'] * $validated['quantity'],
+            'USD',
+            $customerInfo,
+            'Membership package purchase',
+            'stripe'
+        );
+
         $booking = Booking::create([
             'user_id' => Auth::id(), // Will be null if user is not logged in
             'package_type' => $validated['package_type'],
@@ -96,15 +131,19 @@ class TiersController extends Controller
             'zip' => $validated['zip'],
             'payment_method' => 'credit_card',
             'card_last_four' => substr($validated['card_number'], -4), // Store only last 4 digits for security
-            'status' => 'pending'
+            'status' => 'pending',
+            'status' => $payment['success'] ? 'confirmed' : 'pending',
+            'transaction_id' => $payment['transaction_id'],
+            'quantity' => $validated['quantity']
         ]);
-        
+
         // For the thank you page, we prepare a booking array
         $bookingData = [
             'name' => $validated['first_name'] . ' ' . $validated['last_name'],
             'email' => $validated['email'],
             'package' => $package->name,
-            'price' => $validated['package_price'],
+            'price' => $validated['package_price'] * $validated['quantity'],
+            'quantity' => $validated['quantity'],
         ];
 
         return redirect()->route('tiers.thankyou')->with('booking', $bookingData);
@@ -120,7 +159,7 @@ class TiersController extends Controller
         }
 
         $booking = session('booking');
-        
+
         return view('tiers.thankyou', compact('booking'));
     }
 }

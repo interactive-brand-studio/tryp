@@ -13,8 +13,8 @@
     <style>
 
         input:focus{
-            outline:none !important; 
-        }   
+            outline:none !important;
+        }
 
 
         .sidebar-menu-item {
@@ -61,7 +61,7 @@
                 <a href="{{ route('admin.dashboard') }}" class="flex items-center p-5">
                      @if(isset($settings['site_logo']))
                     <img
-                    
+
                     src="{{ $settings['site_logo'] }}" alt="{{ $settings['company_name'] ?? 'MyTravel' }}" >
                 @else
                     <svg xmlns="http://www.w3.org/2000/svg" class="h-8 w-8" viewBox="0 0 20 20" fill="currentColor">
@@ -71,7 +71,7 @@
                 @endif
                 </a>
             </div>
-            
+
             <!-- Admin info -->
             <div class="px-4 py-3 border-b border-gray-700">
                 <div class="flex items-center space-x-3">
@@ -84,14 +84,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <!-- Navigation -->
             <nav class="mt-4 px-3 space-y-2">
                 <a href="{{ route('admin.dashboard') }}" class="sidebar-menu-item flex items-center px-3 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('admin.dashboard') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
                     <i class="fas fa-tachometer-alt w-5 h-5 mr-3 text-center"></i>
                     <span>Dashboard</span>
                 </a>
-                
+
                 <!-- Content Management Section -->
                 <div class="pt-2">
                     <button onclick="toggleDropdown('content-management')" class="sidebar-menu-item w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white">
@@ -106,6 +106,10 @@
                             <i class="fas fa-pen-nib w-5 h-5 mr-3 text-center"></i>
                             <span>Blog Posts</span>
                         </a>
+                        <a href="{{ route('admin.pages.index') }}" class="sidebar-menu-item flex items-center px-3 py-2 text-sm font-medium rounded-lg {{ request()->routeIs('admin.blogs.*') ? 'bg-gray-900 text-white' : 'text-gray-400 hover:bg-gray-700 hover:text-white' }}">
+                            <i class="fas fa-file w-5 h-5 mr-3 text-center"></i>
+                            <span>Pages</span>
+                        </a>
                         <a href="{{ route('admin.blog-categories.index') }}" class="sidebar-menu-item flex items-center px-3 py-2 text-sm font-medium rounded-lg {{ request()->routeIs('admin.blog-categories.*') ? 'bg-gray-900 text-white' : 'text-gray-400 hover:bg-gray-700 hover:text-white' }}">
                             <i class="fas fa-folder w-5 h-5 mr-3 text-center"></i>
                             <span>Blog Categories</span>
@@ -116,7 +120,7 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <!-- Vacation Packages Section -->
                 <div class="pt-2">
                     <button onclick="toggleDropdown('vacation-packages')" class="sidebar-menu-item w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white">
@@ -139,6 +143,11 @@
                             <i class="fas fa-map-pin w-5 h-5 mr-3 text-center"></i>
                             <span>Destinations</span>
                         </a>
+                        <a href="{{ route('admin.hotels.index') }}" class="sidebar-menu-item flex items-center px-3 py-2 text-sm font-medium rounded-lg {{ request()->routeIs('admin.destinations.*') ? 'bg-gray-900 text-white' : 'text-gray-400 hover:bg-gray-700 hover:text-white' }}">
+                            <i class="fas fa-hotel w-5 h-5 mr-3 text-center"></i>
+                            <span>Hotes</span>
+                        </a>
+
                         <a href="{{ route('admin.bundle-extras.index') }}" class="sidebar-menu-item flex items-center px-3 py-2 text-sm font-medium rounded-lg {{ request()->routeIs('admin.bundle-extras.*') ? 'bg-gray-900 text-white' : 'text-gray-400 hover:bg-gray-700 hover:text-white' }}">
                             <i class="fas fa-plus-circle w-5 h-5 mr-3 text-center"></i>
                             <span>Bundle Extras</span>
@@ -149,12 +158,12 @@
                         </a>
                     </div>
                 </div>
-                
+
                 <a href="{{ route('admin.deals.index') }}" class="sidebar-menu-item flex items-center px-3 py-2.5 text-sm font-medium rounded-lg {{ request()->routeIs('admin.deals.*') ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white' }}">
                     <i class="fas fa-percentage w-5 h-5 mr-3 text-center"></i>
                     <span>Deal of the Week</span>
                 </a>
-                
+
                 <!-- Customer Content Section -->
                 <div class="pt-2">
                     <button onclick="toggleDropdown('customer-content')" class="sidebar-menu-item w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white">
@@ -179,7 +188,7 @@
 </a>
                     </div>
                 </div>
-                
+
                 <!-- User Management Section -->
                 <div class="pt-2">
                     <button onclick="toggleDropdown('user-management')" class="sidebar-menu-item w-full flex items-center justify-between px-3 py-2.5 text-sm font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white">
@@ -194,7 +203,7 @@
                             <i class="fas fa-user-friends w-5 h-5 mr-3 text-center"></i>
                             <span>Users</span>
                         </a>
-                        
+
                     </div>
                 </div>
                 <!-- Add this to the navigation section in admin.blade.php -->
@@ -331,7 +340,7 @@
 </div>
                 </div>
             </nav>
-            
+
             <!-- Logout Section -->
             <div class="mt-auto px-3 py-4 border-t border-gray-700">
                 <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();" class="sidebar-menu-item flex items-center px-3 py-2 text-sm font-medium rounded-lg text-gray-300 hover:bg-gray-700 hover:text-white">
@@ -343,7 +352,7 @@
                 </form>
             </div>
         </aside>
-        
+
         <!-- Main Content -->
         <div class="flex-1 flex flex-col md:ml-64">
             <!-- Top Navigation -->
@@ -353,25 +362,25 @@
                     <button id="mobile-menu-button" class="md:hidden flex items-center justify-center h-10 w-10 rounded-md text-gray-600 hover:text-gray-900 hover:bg-gray-100 focus:outline-none">
     <i class="fas fa-bars text-xl"></i>
 </button>
-                    
+
                     <button id="close-sidebar-button" class="absolute top-4 right-4 md:hidden text-gray-400 hover:text-white focus:outline-none">
                         <i class="fas fa-times text-xl"></i>
                     </button>
-                    
+
                     <!-- Right side elements -->
                     <div class="flex items-center space-x-4">
                         <!-- Notifications -->
-                        
-                        
+
+
                         <!-- View Site -->
                         <a href="{{ route('home') }}" target="_blank" class="p-1 rounded-full text-gray-500 hover:text-gray-900 focus:outline-none" title="View Website">
                             <i class="fas fa-external-link-alt text-xl"></i>
                         </a>
-                        
+
                     </div>
                 </div>
             </header>
-            
+
             <!-- Page Content -->
             <main class="flex-1 overflow-y-auto p-4 bg-gray-50">
                 <!-- Breadcrumbs -->
@@ -387,7 +396,7 @@
                         </ol>
                     </nav>
                 </div>
-                
+
                 <!-- Flash Messages -->
                 @if(session('success'))
                 <div class="flash-message mb-6 bg-green-100 border-l-4 border-green-500 rounded-r-lg p-4 shadow-md">
@@ -408,7 +417,7 @@
                     </div>
                 </div>
                 @endif
-                
+
                 @if(session('error'))
                 <div class="flash-message mb-6 bg-red-100 border-l-4 border-red-500 rounded-r-lg p-4 shadow-md">
                     <div class="flex items-center">
@@ -428,19 +437,19 @@
                     </div>
                 </div>
                 @endif
-                
+
                 <!-- Page Title -->
                 <div class="mb-6">
                     <h1 class="text-2xl font-bold text-gray-800">@yield('page-title', 'Dashboard')</h1>
                     <p class="text-sm text-gray-600">@yield('page-description', 'Welcome to Admin Panel')</p>
                 </div>
-                
+
                 <!-- Main Content Area -->
                 <div class="bg-white rounded-lg shadow-sm p-6">
                     @yield('content')
                 </div>
             </main>
-            
+
             <!-- Footer -->
             <footer class="bg-white p-4 border-t border-gray-200">
                 <div class="text-center text-sm text-gray-500">
@@ -449,7 +458,7 @@
             </footer>
         </div>
     </div>
-    
+
     <script>
         // Mobile menu toggle
       // Mobile menu toggle
@@ -457,18 +466,18 @@
         const sidebar = document.getElementById('sidebar');
         sidebar.classList.remove('-translate-x-full');
     });
-    
+
     // Close sidebar on mobile
     document.getElementById('close-sidebar-button').addEventListener('click', function() {
         const sidebar = document.getElementById('sidebar');
         sidebar.classList.add('-translate-x-full');
     });
-    
+
     // Close sidebar when clicking outside on mobile
     document.addEventListener('click', function(event) {
         const sidebar = document.getElementById('sidebar');
         const mobileMenuButton = document.getElementById('mobile-menu-button');
-        
+
         // Only apply this on mobile screens
         if (window.innerWidth < 768) {
             // If click is outside sidebar and not on the menu button
@@ -477,36 +486,36 @@
             }
         }
     });
-        
+
         // Dropdown toggle
         function toggleDropdown(id) {
             const dropdown = document.getElementById(`${id}-dropdown`);
             const icon = document.getElementById(`${id}-icon`);
-            
+
             dropdown.classList.toggle('show');
             icon.classList.toggle('rotate-180');
-            
+
             // Close other dropdowns
             const allDropdowns = document.querySelectorAll('.dropdown-content');
             const allIcons = document.querySelectorAll('[id$="-icon"]');
-            
+
             allDropdowns.forEach(el => {
                 if (el.id !== `${id}-dropdown` && el.classList.contains('show')) {
                     el.classList.remove('show');
                 }
             });
-            
+
             allIcons.forEach(el => {
                 if (el.id !== `${id}-icon` && el.classList.contains('rotate-180')) {
                     el.classList.remove('rotate-180');
                 }
             });
         }
-        
+
         // Auto-expand current section
         document.addEventListener('DOMContentLoaded', function() {
             const currentPath = window.location.pathname;
-            
+
             // Check each section for active links
             const sections = [
                 'content-management',
@@ -515,11 +524,11 @@
                 'user-management',
                 'system'
             ];
-            
+
             sections.forEach(section => {
                 const dropdown = document.getElementById(`${section}-dropdown`);
                 const links = dropdown.querySelectorAll('a');
-                
+
                 links.forEach(link => {
                     if (link.classList.contains('bg-gray-900')) {
                         dropdown.classList.add('show');
@@ -529,7 +538,7 @@
             });
         });
     </script>
-    
+
     @stack('scripts')
 </body>
 </html>

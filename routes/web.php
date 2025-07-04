@@ -103,6 +103,9 @@ Route::prefix('destinations')->name('destinations.')->group(function () {
     Route::get('/{id}', [DestinationController::class, 'show'])->name('show');
 });
 
+Route::get('/hotels/{hotel}', [App\Http\Controllers\HotelController::class, 'show'])->name('hotels.show');
+Route::get('/pages/{page:slug}', [App\Http\Controllers\PageController::class, 'show'])->name('pages.show');
+
 // API Routes for Destination Search - NEW
 Route::prefix('api')->group(function () {
     Route::get('/destinations/search', [ApiDestinationController::class, 'search']);
@@ -132,7 +135,7 @@ Route::prefix('bundles')->name('bundles.')->group(function () {
 // Custom Bundles routes
 Route::get('/custom-bundles', [CustomBundleController::class, 'index'])
      ->name('custom-bundles');
-     
+
 // New consolidated builder route
 Route::get('/custom-bundles/{type?}', [CustomBundleController::class, 'builder'])
      ->name('custom-bundle.builder')
@@ -149,12 +152,12 @@ Route::get('/css/dynamic-styles.css', [AdminSettingsController::class, 'generate
 Route::get('/test-buttons', function () {
     return view('test-buttons');
 })->name('test.buttons');
-     
+
 // Admin Routes
 Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware\AdminMiddleware::class])->group(function () {
     Route::get('/', [AdminDashboardController::class, 'index'])->name('dashboard');
     Route::get('/bookings-dashboard', [AdminDashboardController::class, 'bookingsDashboard'])->name('bookings.dashboard');
-    
+
     // Add this to the admin routes section in web.php
     Route::resource('navigation', \App\Http\Controllers\Admin\NavigationController::class);
     Route::post('navigation/update-order', [\App\Http\Controllers\Admin\NavigationController::class, 'updateOrder'])->name('navigation.update-order');
@@ -163,7 +166,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
     Route::resource('blogs', AdminBlogController::class);
     Route::resource('blog-categories', AdminBlogCategoryController::class);
     Route::resource('tags', AdminTagController::class);
-    
+
     // Bundle Management
     Route::resource('bundles', AdminBundleController::class);
     Route::resource('destinations', AdminDestinationController::class);
@@ -179,7 +182,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
     // Booking Routes - UPDATED
     // Include all booking routes from separate file for better organization
     require __DIR__.'/admin/bookings.php';
-    
+
     // Bundle Extras Routes
     Route::get('bundle-extras', [BundleExtraController::class, 'index'])->name('bundle-extras.index');
     Route::get('bundle-extras/create', [BundleExtraController::class, 'create'])->name('bundle-extras.create');
@@ -187,13 +190,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
     Route::get('bundle-extras/{bundleExtra}/edit', [BundleExtraController::class, 'edit'])->name('bundle-extras.edit');
     Route::put('bundle-extras/{bundleExtra}', [BundleExtraController::class, 'update'])->name('bundle-extras.update');
     Route::delete('bundle-extras/{bundleExtra}', [BundleExtraController::class, 'destroy'])->name('bundle-extras.destroy');
-    
+
     // AJAX route for getting bundle extras
     Route::get('bundle-extras/get-by-bundle', [BundleExtraController::class, 'getBundleExtras'])->name('bundle-extras.get-by-bundle');
-    
+
     // Testimonials Management
     Route::resource('testimonials', \App\Http\Controllers\Admin\TestimonialController::class);
-    
+
     // FAQs Management
     Route::resource('faqs', \App\Http\Controllers\Admin\FaqController::class);
     Route::post('faqs/reorder', [\App\Http\Controllers\Admin\FaqController::class, 'reorder'])->name('faqs.reorder');
@@ -217,13 +220,19 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
      ->name('contact-settings.index');
     Route::put('/contact-settings', [App\Http\Controllers\Admin\ContactSettingsController::class, 'update'])
      ->name('contact-settings.update');
-   
+
     // Travel Packages Management
     Route::resource('travel-packages', \App\Http\Controllers\Admin\TravelPackageController::class);
     Route::post('travel-packages/update-order', [\App\Http\Controllers\Admin\TravelPackageController::class, 'updateOrder'])
         ->name('travel-packages.update-order');
-        
+
     Route::resource('privacy', \App\Http\Controllers\Admin\PrivacyController::class);
+
+    // Hotels Management
+    Route::resource('hotels', \App\Http\Controllers\Admin\HotelController::class);
+
+    // Pages Management
+    Route::resource('pages', \App\Http\Controllers\Admin\PageController::class);
 
     // Deal of the Week Routes
     Route::resource('deals', \App\Http\Controllers\Admin\DealOfWeekController::class);
@@ -231,13 +240,13 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
 
     Route::get('/contact-submissions', [App\Http\Controllers\Admin\ContactSubmissionsController::class, 'index'])
     ->name('contact-submissions.index');
-    
+
     Route::get('/contact-submissions/{id}', [App\Http\Controllers\Admin\ContactSubmissionsController::class, 'show'])
         ->name('contact-submissions.show');
-        
+
     Route::post('/contact-submissions/{id}/reply', [App\Http\Controllers\Admin\ContactSubmissionsController::class, 'reply'])
         ->name('contact-submissions.reply');
-        
+
     Route::delete('/contact-submissions/{id}', [App\Http\Controllers\Admin\ContactSubmissionsController::class, 'destroy'])
         ->name('contact-submissions.destroy');
 
@@ -251,7 +260,7 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
     ]);    Route::post('why-choose-us/update-order', [\App\Http\Controllers\Admin\WhyChooseUsController::class, 'updateOrder'])->name('why-choose-us.update-order');
       // Payment Gateway Management
     Route::resource('payment-gateways', \App\Http\Controllers\Admin\PaymentGatewayController::class);
-    
+
     // Email Subscriptions Management
     Route::get('/email-subscriptions', [\App\Http\Controllers\Admin\EmailSubscriptionController::class, 'index'])->name('email-subscriptions.index');
     Route::patch('/email-subscriptions/{subscription}/status', [\App\Http\Controllers\Admin\EmailSubscriptionController::class, 'updateStatus'])->name('email-subscriptions.update-status');
@@ -265,12 +274,12 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', \App\Http\Middleware
 // User Dashboard Routes
 Route::prefix('user')->name('user.')->middleware('auth')->group(function () {
     Route::get('/', [UserDashboardController::class, 'index'])->name('dashboard');
-    
+
     // Profile Management
     Route::get('/profile', [UserProfileController::class, 'profile'])->name('profile');
     Route::put('/profile', [UserProfileController::class, 'updateProfile'])->name('profile.update');
     Route::put('/password', [UserProfileController::class, 'updatePassword'])->name('password.update');
-    
+
     // Bookings
     Route::get('/bookings', [UserBookingController::class, 'index'])->name('bookings.index');
     Route::get('/bookings/create', [UserBookingController::class, 'create'])->name('bookings.create');

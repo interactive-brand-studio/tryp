@@ -33,6 +33,8 @@ class Booking extends Model
         'zip',
         'payment_method',
         'card_last_four',
+        'transaction_id',
+        'quantity',
         'status',
         'notes'
     ];

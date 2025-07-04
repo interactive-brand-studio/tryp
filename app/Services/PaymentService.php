@@ -35,7 +35,7 @@ class PaymentService
     public function processCardPayment(array $cardData, float $amount, string $currency, array $customerInfo, string $description, ?string $gatewayType = null)
     {
         // Get the payment gateway to use
-        $gateway = $gatewayType 
+        $gateway = $gatewayType
             ? PaymentGateway::where('gateway_type', $gatewayType)->where('is_active', true)->first()
             : $this->getActiveGateway();
 
@@ -85,11 +85,10 @@ class PaymentService
         // You would need to install the Stripe PHP library: composer require stripe/stripe-php
 
         // Example implementation:
-        /*
-        \Stripe\Stripe::setApiKey($config['api_key']);
+        \Stripe\Stripe::setApiKey($config['secret_key']);
         $paymentIntent = \Stripe\PaymentIntent::create([
-            'amount' => $amount * 100, // Convert to cents
-            'currency' => $currency,
+            'amount' => (int) round($amount * 100),
+            'currency' => strtolower($currency),
             'payment_method_data' => [
                 'type' => 'card',
                 'card' => [
@@ -99,23 +98,26 @@ class PaymentService
                     'cvc' => $cardData['cvc'],
                 ],
             ],
-            'description' => $description,
-            'customer_data' => [
-                'email' => $customerInfo['email'],
-                'name' => $customerInfo['name'],
+            'automatic_payment_methods' => [
+                'enabled' => true,
+                'allow_redirects' => 'never',
             ],
+            'description' => $description,
+            // 'customer_data' => [
+            //     'email' => $customerInfo['email'],
+            //     'name' => $customerInfo['name'],
+            // ],
             'confirm' => true,
         ]);
-        */
 
         // Simulated response for demo purposes
         return [
-            'success' => true,
-            'transaction_id' => 'str_' . uniqid(),
+            'success' => $paymentIntent->status === 'succeeded',
+            'transaction_id' => $paymentIntent->id,
             'gateway' => 'stripe',
             'amount' => $amount,
             'currency' => $currency,
-            'message' => 'Payment processed successfully',
+            'message' => $paymentIntent->status,
         ];
     }
 
@@ -217,16 +219,16 @@ class PaymentService
     {
         // Remove spaces and dashes
         $cardNumber = preg_replace('/\D/', '', $cardNumber);
-        
+
         // Check if the number contains only digits
         if (!ctype_digit($cardNumber)) {
             return false;
         }
-        
+
         // Implement the Luhn algorithm check
         $sum = 0;
         $length = strlen($cardNumber);
-        
+
         for ($i = 0; $i < $length; $i++) {
             $digit = (int) $cardNumber[$length - $i - 1];
             if ($i % 2 == 1) {
@@ -237,7 +239,7 @@ class PaymentService
             }
             $sum += $digit;
         }
-        
+
         return ($sum % 10) == 0;
     }
 }
