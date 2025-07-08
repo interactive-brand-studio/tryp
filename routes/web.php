@@ -104,6 +104,7 @@ Route::prefix('destinations')->name('destinations.')->group(function () {
 });
 
 Route::get('/hotels/{hotel}', [App\Http\Controllers\HotelController::class, 'show'])->name('hotels.show');
+Route::get('/api/hotels/{hotel}', [App\Http\Controllers\HotelController::class, 'getHotel'])->name('hotels.api.show');
 Route::get('/pages/{page:slug}', [App\Http\Controllers\PageController::class, 'show'])->name('pages.show');
 
 // API Routes for Destination Search - NEW

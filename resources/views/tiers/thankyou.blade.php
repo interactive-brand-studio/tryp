@@ -23,6 +23,7 @@
                             <p><span class="font-semibold">Name:</span> {{ $booking['name'] }}</p>
                             <p><span class="font-semibold">Email:</span> {{ $booking['email'] }}</p>
                             <p><span class="font-semibold">Package:</span> {{ $booking['package'] }}</p>
+                            <p><span class="font-semibold">Quantity:</span> {{ $booking['quantity'] }}</p>
                             <p><span class="font-semibold">Total:</span> ${{ $booking['price'] }}</p>
                         </div>
                     </div>
