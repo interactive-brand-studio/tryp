@@ -99,7 +99,7 @@ class TiersController extends Controller
         ];
 
         $customerInfo = [
-            'name' => $validated['first_name'] . ' ' . $validated['last_name'],
+            'name' => $validated['first_name'].' '.$validated['last_name'],
             'email' => $validated['email'],
             'address' => $validated['address'],
             'city' => $validated['city'],
